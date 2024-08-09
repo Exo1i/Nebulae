@@ -44,14 +44,14 @@ export const Desktop = () => {
                 </div>
                 <div className="absolute w-[1280px] h-[360px] top-[152px] left-20 rounded-[26px]">
                     <div
-                        className="absolute top-40 left-[108px] [font-family:'Poppins',Helvetica] font-bold text-white text-[40px] tracking-[0] leading-[normal]">
+                        className="absolute top-40 left-[108px] [font-family:'Poppins',Helvetica] font-bold text-white text-[15px] tracking-[0] leading-[normal]">
                         {""}
                     </div>
                     <div
                         className="flex flex-col w-[1280px] h-[360px] items-start gap-2.5 px-[71px] py-[57px] absolute top-0 left-0 rounded-[26px] bg-[url(/static/img/frame-9.svg)] bg-cover bg-[50%_50%]">
                         <div
                             className="flex flex-col w-[1123px] items-start justify-center gap-1 relative flex-[0_0_auto]">
-                            <p className="relative self-stretch mt-[-1.00px] [font-family:'Poppins',Helvetica] font-bold text-white text-[40px] tracking-[0] leading-[normal]">
+                            <p className="relative self-stretch mt-[-1.00px] [font-family:'Poppins',Helvetica] font-bold text-white text-[15px] tracking-[0] leading-[normal]">
                                 From building apps at enterprise scale&nbsp;&nbsp;to AI-powered, <br />
                                 intelligent apps
                             </p>
@@ -85,7 +85,7 @@ export const Desktop = () => {
                     <div className="relative h-[309px] rounded-[10px]">
                         <PropertyDefaultWrapper
                             className="!h-[309px] !absolute !left-0 !w-[382px] !top-0"
-                            divClassName="!mt-[unset] !text-lg !leading-[18px]"
+                            divClassName="!mt-[unset]"
                             framePropertyDefaultClassName="!relative"
                             frameVector="/img/vector-3-8.svg"
                             property1="default"
