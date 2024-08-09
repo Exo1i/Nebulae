@@ -60,7 +60,7 @@ export default function ChatBotOverlay({closeChatBotOverlay}) {
                         <img onClick={sendMessageToBot} src="/img/sendIcon.svg" alt="SendIcon" style={{
                             position: 'absolute',
                             top: '50%',
-                            left: '10px',
+                            right: '10px',
                             transform: 'translateY(-50%)',
                             zIndex: 1,
                             cursor: 'pointer',
