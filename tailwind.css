@@ -1,0 +1,56 @@
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .all-\[unset\] {
+    all: unset;
+  }
+}
+
+:root {
+  --m3-schemes-on-background: rgba(29, 27, 32, 1);
+}
+
+/*
+
+To enable a theme in your HTML, simply add one of the following data attributes to an HTML element, like so:
+
+<body data-m3-mode="light">
+    <!-- the rest of your content -->
+</body>
+
+You can apply the theme on any DOM node, not just the `body`
+
+*/
+
+[data-m3-mode="light"] {
+  --m3-schemes-on-background: rgba(29, 27, 32, 1);
+}
+
+[data-m3-mode="light-high-contrast"] {
+  --m3-schemes-on-background: rgba(29, 27, 32, 1);
+}
+
+[data-m3-mode="light-medium-contrast"] {
+  --m3-schemes-on-background: rgba(29, 27, 32, 1);
+}
+
+[data-m3-mode="dark"] {
+  --m3-schemes-on-background: rgba(230, 224, 233, 1);
+}
+
+[data-m3-mode="dark-high-contrast"] {
+  --m3-schemes-on-background: rgba(230, 224, 233, 1);
+}
+
+[data-m3-mode="dark-medium-contrast"] {
+  --m3-schemes-on-background: rgba(230, 224, 233, 1);
+}
+
+[data-m3-mode="monochrome-light"] {
+  --m3-schemes-on-background: rgba(230, 224, 233, 1);
+}
+
+[data-m3-mode="monochrome-dark"] {
+  --m3-schemes-on-background: rgba(230, 224, 233, 1);
+}
