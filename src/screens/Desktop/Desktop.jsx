@@ -124,7 +124,7 @@ export const Desktop = () => {
                      src="/img/chatBot.svg"
                      onClick={() => setIsChatBotOpen(true)}
                      alt={"chatbot"} />
-                {isChatBotOpen && (<ChatBotOverlay closeChatBotOverlay={() => setIsChatBotOpen(false)} />)}
+                {isChatBotOpen && (<ChatBotOverlay closeChatOverlay={() => setIsChatBotOpen(false)} />)}
             </div>
         </div>
     );
