@@ -78,7 +78,7 @@ export default function Pricing() {
                     Nebulae Pricing Plans
                 </Typography>
                 <Typography variant="body1" color="text.secondary">
-                    Choose a plan that fits your business needs. Whether you're just starting out or need a
+                    Choose a plan that fits your business needs. Whether you&apos;re just starting out or need a
                     comprehensive solution, Nebulae has you covered.
                 </Typography>
             </Box>

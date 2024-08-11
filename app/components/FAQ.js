@@ -75,7 +75,7 @@ export default function FAQ() {
                         id="panel2d-header"
                     >
                         <Typography component="h3" variant="subtitle2">
-                            How secure is Nebulae's cloud platform?
+                            How secure is Nebulae&apos;s cloud platform?
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
@@ -100,7 +100,7 @@ export default function FAQ() {
                         id="panel3d-header"
                     >
                         <Typography component="h3" variant="subtitle2">
-                            Can Nebulae's AI solutions be customized for my business?
+                            Can Nebulae&apos;s AI solutions be customized for my business?
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
@@ -125,7 +125,7 @@ export default function FAQ() {
                         id="panel4d-header"
                     >
                         <Typography component="h3" variant="subtitle2">
-                            How do I get started with Nebulae's services?
+                            How do I get started with Nebulae&apos;s services?
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
@@ -135,7 +135,7 @@ export default function FAQ() {
                             sx={{maxWidth: {sm: '100%', md: '70%'}}}
                         >
                             Getting started is easy! You can sign up on our website or contact our sales team at <Link
-                            href="mailto:sales@nebulae.com">sales@nebulae.com</Link>. We'll guide you through the
+                            href="mailto:sales@nebulae.com">sales@nebulae.com</Link>. We&apos;ll guide you through the
                             process and help you choose the best solutions for your business.
                         </Typography>
                     </AccordionDetails>
