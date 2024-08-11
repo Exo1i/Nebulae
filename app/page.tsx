@@ -56,8 +56,9 @@ export default function LandingPage() {
                                     setIsChatBotOpen(false)
                                     setHadOpenedChatBot(true)
                                 }} />)}
-            {hadOpenedChatBot &&
-                <FeedbackOverlay userID={userId} open={hadOpenedChatBot} handleClose={handleFeedbackClose} />}
+            {hadOpenedChatBot && userId ?
+                <FeedbackOverlay userID={userId} open={hadOpenedChatBot}
+                                 handleClose={handleFeedbackClose} /> : undefined}
             {!isChatBotOpen && <ChatIcon onClick={() => setIsChatBotOpen(true)} />}
 
         </ThemeProvider>

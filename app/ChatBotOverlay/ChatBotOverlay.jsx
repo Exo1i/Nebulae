@@ -9,8 +9,7 @@ import {marked} from 'marked'; // Import marked for Markdown parsing
 import {Button, Dialog, DialogTitle, DialogContent, List as MuiList, ListItem, ListItemText} from "@mui/material";
 import supabase from './supabaseClient'; // Import Supabase client
 import {
-    DialogActions,
-    IconButton
+    DialogActions, IconButton
 } from "@mui/material";
 
 export default function ChatBotOverlay({closeChatOverlay, isSignedIn, userID}) {
@@ -31,17 +30,21 @@ export default function ChatBotOverlay({closeChatOverlay, isSignedIn, userID}) {
 
     useEffect(scrollToBottom, [messages]);
     const fetchHistory = async () => {
-        const {data, error} = await supabase
-            .from('userhistory')
-            .select('id, userID, title, messages')
-            .eq('userID', userID)
-            .order('title', {ascending: false});
+        if (userID) {
+            const {
+                data, error
+            } = await supabase
+                .from('userhistory')
+                .select('id, userID, title, messages')
+                .eq('userID', userID)
+                .order('title', {ascending: false});
 
-        if (error) {
-            console.error("Error fetching history:", error);
-            return;
+            if (error) {
+                console.error("Error fetching history:", error);
+                return;
+            }
+            setHistory(data);
         }
-        setHistory(data);
     };
 
     fetchHistory();
@@ -76,7 +79,7 @@ export default function ChatBotOverlay({closeChatOverlay, isSignedIn, userID}) {
 
             setMessages(prevMessages => [...prevMessages.slice(0, -1), {role: 'assistant', content: botResp}]);
 
-            if (selectedHistoryId) {
+            if (userID) if (selectedHistoryId) {
                 // Update the selected history entry
                 const {error: updateError} = await supabase
                     .from('userhistory')
@@ -93,9 +96,7 @@ export default function ChatBotOverlay({closeChatOverlay, isSignedIn, userID}) {
                 const {data, error: insertError} = await supabase
                     .from('userhistory')
                     .insert([{
-                        userID,
-                        title: new Date().toISOString(),
-                        messages: JSON.stringify(updatedMessages)
+                        userID, title: new Date().toISOString(), messages: JSON.stringify(updatedMessages)
                     }]);
 
                 if (insertError) {
@@ -108,8 +109,7 @@ export default function ChatBotOverlay({closeChatOverlay, isSignedIn, userID}) {
         } catch (error) {
             console.error("Error processing message:", error);
             setMessages(prevMessages => [...prevMessages.slice(0, -1), {
-                role: 'assistant',
-                content: 'Sorry, something went wrong. Please try again.'
+                role: 'assistant', content: 'Sorry, something went wrong. Please try again.'
             }]);
         }
 
@@ -180,7 +180,7 @@ export default function ChatBotOverlay({closeChatOverlay, isSignedIn, userID}) {
                     color: isDarkMode ? '#FFF' : '#333',
                 }}
             />
-            <List
+            {userID && <List
                 onClick={() => setHistoryDialogOpen(true)}
                 style={{
                     position: "absolute",
@@ -189,7 +189,7 @@ export default function ChatBotOverlay({closeChatOverlay, isSignedIn, userID}) {
                     cursor: "pointer",
                     color: isDarkMode ? '#FFF' : '#333',
                 }}
-            />
+            />}
             <div
                 style={{
                     display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center",
@@ -325,8 +325,7 @@ export default function ChatBotOverlay({closeChatOverlay, isSignedIn, userID}) {
             onClose={() => setHistoryDialogOpen(false)}
             PaperProps={{
                 style: {
-                    backgroundColor: isDarkMode ? '#1E1E1E' : '#FFFFFF',
-                    color: isDarkMode ? '#FFFFFF' : '#000000',
+                    backgroundColor: isDarkMode ? '#1E1E1E' : '#FFFFFF', color: isDarkMode ? '#FFFFFF' : '#000000',
                 },
             }}
         >
@@ -334,16 +333,14 @@ export default function ChatBotOverlay({closeChatOverlay, isSignedIn, userID}) {
                 <span style={{color: '#FFFFFF'}}>Chat History</span> : "Chat History"}</DialogTitle>
             <DialogContent>
                 <MuiList>
-                    {history.map((item) => (
-                        <ListItem button key={item.id} onClick={() => handleHistoryClick(item)}>
+                    {history.map((item) => (<ListItem button key={item.id} onClick={() => handleHistoryClick(item)}>
                             <ListItemText
                                 primary={<span
                                     style={{color: isDarkMode ? '#FFFFFF' : '#000000'}}>{new Date(item.title).toLocaleString()}</span>}
                                 secondary={<span
                                     style={{color: isDarkMode ? '#BBBBBB' : '#666666'}}>{`Messages: ${JSON.parse(item.messages).length}`}</span>}
                             />
-                        </ListItem>
-                    ))}
+                        </ListItem>))}
                 </MuiList>
             </DialogContent>
             <DialogActions>
