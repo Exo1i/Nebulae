@@ -87,7 +87,8 @@ export default function ChatBotOverlay({closeChatOverlay, isSignedIn, userID}) {
 
             if (userID) {
                 if (selectedHistoryId) {
-                    // Update the selected history entry
+                    console.log("Updating existing history ID:", selectedHistoryId);
+                    // Update the existing history entry
                     const {error: updateError} = await supabase
                         .from('userhistory')
                         .update({
@@ -99,16 +100,20 @@ export default function ChatBotOverlay({closeChatOverlay, isSignedIn, userID}) {
                         console.error('Error updating history entry:', updateError);
                     }
                 } else {
-                    // Create a new history entry with the current date
+                    console.log("Creating a new history entry");
+                    // Create a new history entry and store its ID
                     const {data, error: insertError} = await supabase
                         .from('userhistory')
                         .insert([{
-                            userID, title: new Date().toISOString(), messages: JSON.stringify(updatedMessages)
-                        }]);
+                            userID,
+                            title: new Date().toISOString(),
+                            messages: JSON.stringify(updatedMessages)
+                        }])
+                        .select();
 
                     if (insertError) {
                         console.error('Error creating new history entry:', insertError);
-                    } else if (data) {
+                    } else if (data && data.length > 0) {
                         setSelectedHistoryId(data[0].id);
                     }
                 }

@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import Rating from '@mui/material/Rating';
 import Modal from '@mui/material/Modal';
 import supabase from '../ChatBotOverlay/supabaseClient';
@@ -55,7 +54,8 @@ const FeedbackOverlay = ({open, handleClose, userID}) => {
             }}
         >
             {!feedbackSubmitted ? (<>
-                <Typography id="feedback-modal-title" variant="h6" component="h2" color>
+                <Typography id="feedback-modal-title" variant="h6" component="h2"
+                            color={useTheme().palette.mode === 'dark' ? "white" : "black"}>
                     Rate Your Experience
                 </Typography>
                 <Rating
