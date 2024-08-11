@@ -1,4 +1,3 @@
-'use client'
 import * as React from 'react';
 import {PaletteMode} from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -9,13 +8,15 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import AutoAwesomeRoundedIcon from '@mui/icons-material/AutoAwesomeRounded';
 import AppAppBar from './components/AppAppBar';
+import Hero from './components/Hero';
+import LogoCollection from './components/LogoCollection';
+import Highlights from './components/Highlights';
+import Pricing from './components/Pricing';
 import Features from './components/Features';
-
+import Testimonials from './components/Testimonials';
+import FAQ from './components/FAQ';
+import Footer from './components/Footer';
 import getLPTheme from './getLPTheme';
-import ChatBotOverlay from "./ChatBotOverlay/ChatBotOverlay";
-import Image from "next/image";
-import {SupportAgent, SupportAgentOutlined} from "@mui/icons-material";
-import ChatIcon from "./components/ChatIcon";
 
 interface ToggleCustomThemeProps {
     showCustomTheme: Boolean;
@@ -61,23 +62,31 @@ function ToggleCustomTheme({
 }
 
 export default function LandingPage() {
-    const [mode, setMode] = React.useState<PaletteMode>('light');
+    const [mode, setMode] = React.useState('light');
+    const [showCustomTheme, setShowCustomTheme] = React.useState(true);
     const LPtheme = createTheme(getLPTheme(mode));
-    const [isChatBotOpen, setIsChatBotOpen] = React.useState(false);
+    const defaultTheme = createTheme({palette: {mode}});
+
     const toggleColorMode = () => {
         setMode((prev) => (prev === 'dark' ? 'light' : 'dark'));
     };
 
+    const toggleCustomTheme = () => {
+        setShowCustomTheme((prev) => !prev);
+    };
+
     return (
-        <ThemeProvider theme={LPtheme}>
+        <ThemeProvider theme={showCustomTheme ? LPtheme : defaultTheme}>
             <CssBaseline />
             <AppAppBar mode={mode} toggleColorMode={toggleColorMode} />
+            <Hero />
             <Box sx={{bgcolor: 'background.default'}}>
                 <Features />
             </Box>
-
-            {isChatBotOpen && (<ChatBotOverlay closeChatOverlay={() => setIsChatBotOpen(false)} />)}
-            {!isChatBotOpen && <ChatIcon onClick={() => setIsChatBotOpen(true)} />}
+            <ToggleCustomTheme
+                showCustomTheme={showCustomTheme}
+                toggleCustomTheme={toggleCustomTheme}
+            />
         </ThemeProvider>
     );
 }

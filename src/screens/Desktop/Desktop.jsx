@@ -120,11 +120,6 @@ export const Desktop = () => {
                     </div>
                 </div>
 
-                <img style={{cursor: "pointer"}} className="fixed w-[65px] h-[65px] top-[820] left-[1800px]"
-                     src="/img/chatBot.svg"
-                     onClick={() => setIsChatBotOpen(true)}
-                     alt={"chatbot"} />
-                {isChatBotOpen && (<ChatBotOverlay closeChatBotOverlay={() => setIsChatBotOpen(false)} />)}
             </div>
         </div>
     );

@@ -54,7 +54,7 @@ export default function Features() {
       <Grid container spacing={6}>
         <Grid item xs={12} md={6}>
           <div>
-            <Typography component="h2" variant="h4" color="text.primary">
+            <Typography component="h2" variant="h1" color="text.primary">
               Product features
             </Typography>
             <Typography
