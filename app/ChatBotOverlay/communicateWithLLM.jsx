@@ -2,7 +2,7 @@ import Together from "together-ai";
 
 export default async function sendToLLM(messages, isSignedIn, userID) {
 
-    const together = new Together({apiKey: "e83221f8b0ee214ec9ac180c04dd3583783816b6a9dddd6e01f61de71f8ce2d4"});
+    const together = new Together({apiKey: "d2b7f84f7977126fb382bd975ee304757746ad309ab4e00f4b49e88845b3c818"});
     const response = await together.chat.completions.create({
         messages: [{
             "role": "system",
