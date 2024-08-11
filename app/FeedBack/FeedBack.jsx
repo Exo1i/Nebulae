@@ -55,7 +55,7 @@ const FeedbackOverlay = ({open, handleClose, userID}) => {
         >
             {!feedbackSubmitted ? (<>
                 <Typography id="feedback-modal-title" variant="h6" component="h2"
-                            color={useTheme().palette.mode === 'dark' ? "white" : "black"}>
+                            color={darkMode ? "white" : "black"}>
                     Rate Your Experience
                 </Typography>
                 <Rating
