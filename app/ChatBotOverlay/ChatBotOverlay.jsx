@@ -1,16 +1,22 @@
-import React, {useState, useRef, useEffect} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import sendToLLM from "./communicateWithLLM";
 import Image from "next/image";
 import {useTheme} from '@mui/material/styles';
 import {CancelOutlined, Delete, List} from "@mui/icons-material";
 import Typography from "@mui/material/Typography";
-import {useAuth} from '@clerk/clerk-react';
 import {marked} from 'marked'; // Import marked for Markdown parsing
-import {Button, Dialog, DialogTitle, DialogContent, List as MuiList, ListItem, ListItemText} from "@mui/material";
-import supabase from './supabaseClient'; // Import Supabase client
 import {
-    DialogActions, IconButton
+    Button,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    IconButton,
+    List as MuiList,
+    ListItem,
+    ListItemText
 } from "@mui/material";
+import supabase from './supabaseClient'; // Import Supabase client
 
 export default function ChatBotOverlay({closeChatOverlay, isSignedIn, userID}) {
     const [messages, setMessages] = useState([]);
@@ -79,33 +85,34 @@ export default function ChatBotOverlay({closeChatOverlay, isSignedIn, userID}) {
 
             setMessages(prevMessages => [...prevMessages.slice(0, -1), {role: 'assistant', content: botResp}]);
 
-            if (userID) if (selectedHistoryId) {
-                // Update the selected history entry
-                const {error: updateError} = await supabase
-                    .from('userhistory')
-                    .update({
-                        messages: JSON.stringify(updatedMessages)
-                    })
-                    .eq('id', selectedHistoryId);
+            if (userID) {
+                if (selectedHistoryId) {
+                    // Update the selected history entry
+                    const {error: updateError} = await supabase
+                        .from('userhistory')
+                        .update({
+                            messages: JSON.stringify(updatedMessages)
+                        })
+                        .eq('id', selectedHistoryId);
 
-                if (updateError) {
-                    console.error('Error updating history entry:', updateError);
-                }
-            } else {
-                // Create a new history entry with the current date
-                const {data, error: insertError} = await supabase
-                    .from('userhistory')
-                    .insert([{
-                        userID, title: new Date().toISOString(), messages: JSON.stringify(updatedMessages)
-                    }]);
+                    if (updateError) {
+                        console.error('Error updating history entry:', updateError);
+                    }
+                } else {
+                    // Create a new history entry with the current date
+                    const {data, error: insertError} = await supabase
+                        .from('userhistory')
+                        .insert([{
+                            userID, title: new Date().toISOString(), messages: JSON.stringify(updatedMessages)
+                        }]);
 
-                if (insertError) {
-                    console.error('Error creating new history entry:', insertError);
-                } else if (data) {
-                    setSelectedHistoryId(data[0].id);
+                    if (insertError) {
+                        console.error('Error creating new history entry:', insertError);
+                    } else if (data) {
+                        setSelectedHistoryId(data[0].id);
+                    }
                 }
             }
-
         } catch (error) {
             console.error("Error processing message:", error);
             setMessages(prevMessages => [...prevMessages.slice(0, -1), {
@@ -334,13 +341,13 @@ export default function ChatBotOverlay({closeChatOverlay, isSignedIn, userID}) {
             <DialogContent>
                 <MuiList>
                     {history.map((item) => (<ListItem button key={item.id} onClick={() => handleHistoryClick(item)}>
-                            <ListItemText
-                                primary={<span
-                                    style={{color: isDarkMode ? '#FFFFFF' : '#000000'}}>{new Date(item.title).toLocaleString()}</span>}
-                                secondary={<span
-                                    style={{color: isDarkMode ? '#BBBBBB' : '#666666'}}>{`Messages: ${JSON.parse(item.messages).length}`}</span>}
-                            />
-                        </ListItem>))}
+                        <ListItemText
+                            primary={<span
+                                style={{color: isDarkMode ? '#FFFFFF' : '#000000'}}>{new Date(item.title).toLocaleString()}</span>}
+                            secondary={<span
+                                style={{color: isDarkMode ? '#BBBBBB' : '#666666'}}>{`Messages: ${JSON.parse(item.messages).length}`}</span>}
+                        />
+                    </ListItem>))}
                 </MuiList>
             </DialogContent>
             <DialogActions>
