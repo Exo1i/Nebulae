@@ -19,6 +19,7 @@ import {
     SignedOut,
     UserButton
 } from '@clerk/nextjs';
+import theme from "tailwindcss/defaultTheme";
 
 function AppAppBar({mode, toggleColorMode}) {
     const logoStyle = {
@@ -132,11 +133,20 @@ function AppAppBar({mode, toggleColorMode}) {
                         }}
                     >
                         <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} />
-                        <SignedIn>
+                        <SignedIn appearance={{baseTheme: mode === 'light' ? "" : "neobrutalism"}}>
                             <UserButton />
                         </SignedIn>
-                        <SignedOut>
-                            <SignInButton />
+                        <SignedOut appearance={{baseTheme: mode === 'light' ? "" : "neobrutalism"}}>
+                            <SignInButton>
+                                <Button
+                                    color="primary"
+                                    variant="text"
+                                    size="small"
+                                    component="a"
+                                >
+                                    Sign in
+                                </Button>
+                            </SignInButton>
                         </SignedOut>
                     </Box>
                     <Box sx={{display: {sm: '', md: 'none'}}}>

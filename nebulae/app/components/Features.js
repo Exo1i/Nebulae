@@ -20,24 +20,24 @@ const items = [
         title: 'Artificial intelligence',
         description:
             'Build intelligent apps at enterprise scale with our AI portfolio.',
-        imageLight: 'url("/static/images/templates/templates-images/dash-light.png")',
-        imageDark: 'url("/static/images/templates/templates-images/dash-dark.png")',
+        imageLight: 'url("https://img.freepik.com/free-photo/ai-nuclear-energy-future-innovation-disruptive-technology_53876-129784.jpg")',
+        imageDark: 'url("https://img.freepik.com/free-photo/ai-nuclear-energy-future-innovation-disruptive-technology_53876-129784.jpg")',
     },
     {
         icon: <FactoryIcon />,
         title: 'Industry',
         description:
             'Reimagine your business and enable security and compliance at scale',
-        imageLight: 'url("/static/images/templates/templates-images/mobile-light.png")',
-        imageDark: 'url("/static/images/templates/templates-images/mobile-dark.png")',
+        imageLight: 'url("https://img.freepik.com/free-photo/technological-futuristic-holograms-logistics-means-transport_23-2151663027.jpg?t=st=1723341580~exp=1723345180~hmac=87c65d851d139d4140b4cb584e3d91a7cdd811459c08b44e35871d91fce83ace&w=740")',
+        imageDark: 'url("https://img.freepik.com/free-photo/technological-futuristic-holograms-logistics-means-transport_23-2151663027.jpg?t=st=1723341580~exp=1723345180~hmac=87c65d851d139d4140b4cb584e3d91a7cdd811459c08b44e35871d91fce83ace&w=740")',
     },
     {
         icon: <SportsEsports />,
         title: 'Gaming',
         description:
             'Build, run, and grow games with purpose-built, developer-friendly solutions',
-        imageLight: 'url("/static/images/templates/templates-images/devices-light.png")',
-        imageDark: 'url("/static/images/templates/templates-images/devices-dark.png")',
+        imageLight: 'url("https://img.freepik.com/free-photo/medium-shot-smiley-man-playing-videogame_23-2149350012.jpg")',
+        imageDark: 'url("https://img.freepik.com/free-photo/man-holding-controller-close-up_23-2149005239.jpg")',
     },
 ];
 
@@ -254,8 +254,8 @@ export default function Features() {
                         <Box
                             sx={{
                                 m: 'auto',
-                                width: 420,
-                                height: 500,
+                                width: '100%',
+                                height: "100%",
                                 backgroundSize: 'contain',
                                 backgroundImage: (theme) =>
                                     theme.palette.mode === 'light'

@@ -13,9 +13,9 @@ import Features from './components/Features';
 
 import getLPTheme from './getLPTheme';
 import ChatBotOverlay from "./ChatBotOverlay/ChatBotOverlay";
-import Image from "next/image";
-import {SupportAgent, SupportAgentOutlined} from "@mui/icons-material";
+
 import ChatIcon from "./components/ChatIcon";
+import {useAuth} from "@clerk/clerk-react";
 
 interface ToggleCustomThemeProps {
     showCustomTheme: Boolean;
@@ -67,6 +67,7 @@ export default function LandingPage() {
     const toggleColorMode = () => {
         setMode((prev) => (prev === 'dark' ? 'light' : 'dark'));
     };
+    const {userId, isSignedIn} = useAuth();
 
     return (
         <ThemeProvider theme={LPtheme}>
@@ -76,7 +77,9 @@ export default function LandingPage() {
                 <Features />
             </Box>
 
-            {isChatBotOpen && (<ChatBotOverlay closeChatOverlay={() => setIsChatBotOpen(false)} />)}
+            {isChatBotOpen && (
+                <ChatBotOverlay userID={userId} isSignedIn={isSignedIn}
+                                closeChatOverlay={() => setIsChatBotOpen(false)} />)}
             {!isChatBotOpen && <ChatIcon onClick={() => setIsChatBotOpen(true)} />}
         </ThemeProvider>
     );
