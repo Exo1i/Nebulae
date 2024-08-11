@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {PaletteMode} from '@mui/material';
+import { PaletteMode } from '@mui/material';
 import Box from '@mui/material/Box';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -11,7 +11,13 @@ import MenuItem from '@mui/material/MenuItem';
 import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
 import ToggleColorMode from './ToggleColorMode';
-import Image from "next/image";
+
+import {
+    SignInButton,
+    SignedIn,
+    SignedOut,
+    UserButton
+} from '@clerk/nextjs';
 
 const logoStyle = {
     width: '140px',
@@ -24,7 +30,7 @@ interface AppAppBarProps {
     toggleColorMode: () => void;
 }
 
-function AppAppBar({mode, toggleColorMode}: AppAppBarProps) {
+function AppAppBar({ mode, toggleColorMode }: AppAppBarProps) {
     const [open, setOpen] = React.useState(false);
 
     const toggleDrawer = (newOpen: boolean) => () => {
@@ -36,7 +42,7 @@ function AppAppBar({mode, toggleColorMode}: AppAppBarProps) {
         const offset = 128;
         if (sectionElement) {
             const targetScroll = sectionElement.offsetTop - offset;
-            sectionElement.scrollIntoView({behavior: 'smooth'});
+            sectionElement.scrollIntoView({ behavior: 'smooth' });
             window.scrollTo({
                 top: targetScroll,
                 behavior: 'smooth',
@@ -88,13 +94,17 @@ function AppAppBar({mode, toggleColorMode}: AppAppBarProps) {
                                 px: 0,
                             }}
                         >
-                            <img src="../../img/logo.png"
-                                 style={logoStyle}
-                                 alt="logo of sitemark" />
-                            <Box sx={{display: {xs: 'none', md: 'flex'}}}>
+                            <img
+                                src={
+                                    'https://assets-global.website-files.com/61ed56ae9da9fd7e0ef0a967/61f12e6faf73568658154dae_SitemarkDefault.svg'
+                                }
+                                style={logoStyle}
+                                alt="logo of sitemark"
+                            />
+                            <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                                 <MenuItem
                                     onClick={() => scrollToSection('features')}
-                                    sx={{py: '6px', px: '12px'}}
+                                    sx={{ py: '6px', px: '12px' }}
                                 >
                                     <Typography variant="body2" color="text.primary">
                                         Features
@@ -102,7 +112,7 @@ function AppAppBar({mode, toggleColorMode}: AppAppBarProps) {
                                 </MenuItem>
                                 <MenuItem
                                     onClick={() => scrollToSection('testimonials')}
-                                    sx={{py: '6px', px: '12px'}}
+                                    sx={{ py: '6px', px: '12px' }}
                                 >
                                     <Typography variant="body2" color="text.primary">
                                         Testimonials
@@ -110,7 +120,7 @@ function AppAppBar({mode, toggleColorMode}: AppAppBarProps) {
                                 </MenuItem>
                                 <MenuItem
                                     onClick={() => scrollToSection('highlights')}
-                                    sx={{py: '6px', px: '12px'}}
+                                    sx={{ py: '6px', px: '12px' }}
                                 >
                                     <Typography variant="body2" color="text.primary">
                                         Highlights
@@ -118,7 +128,7 @@ function AppAppBar({mode, toggleColorMode}: AppAppBarProps) {
                                 </MenuItem>
                                 <MenuItem
                                     onClick={() => scrollToSection('pricing')}
-                                    sx={{py: '6px', px: '12px'}}
+                                    sx={{ py: '6px', px: '12px' }}
                                 >
                                     <Typography variant="body2" color="text.primary">
                                         Pricing
@@ -126,7 +136,7 @@ function AppAppBar({mode, toggleColorMode}: AppAppBarProps) {
                                 </MenuItem>
                                 <MenuItem
                                     onClick={() => scrollToSection('faq')}
-                                    sx={{py: '6px', px: '12px'}}
+                                    sx={{ py: '6px', px: '12px' }}
                                 >
                                     <Typography variant="body2" color="text.primary">
                                         FAQ
@@ -136,40 +146,26 @@ function AppAppBar({mode, toggleColorMode}: AppAppBarProps) {
                         </Box>
                         <Box
                             sx={{
-                                display: {xs: 'none', md: 'flex'},
+                                display: { xs: 'none', md: 'flex' },
                                 gap: 0.5,
                                 alignItems: 'center',
                             }}
                         >
                             <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} />
-                            <Button
-                                color="primary"
-                                variant="text"
-                                size="small"
-                                component="a"
-                                href="/material-ui/getting-started/templates/sign-in/"
-                                target="_blank"
-                            >
-                                Sign in
-                            </Button>
-                            <Button
-                                color="primary"
-                                variant="contained"
-                                size="small"
-                                component="a"
-                                href="/material-ui/getting-started/templates/sign-up/"
-                                target="_blank"
-                            >
-                                Sign up
-                            </Button>
+                            <SignedIn>
+                                <UserButton />
+                            </SignedIn>
+                            <SignedOut>
+                                <SignInButton />
+                            </SignedOut>
                         </Box>
-                        <Box sx={{display: {sm: '', md: 'none'}}}>
+                        <Box sx={{ display: { sm: '', md: 'none' } }}>
                             <Button
                                 variant="text"
                                 color="primary"
                                 aria-label="menu"
                                 onClick={toggleDrawer(true)}
-                                sx={{minWidth: '30px', p: '4px'}}
+                                sx={{ minWidth: '30px', p: '4px' }}
                             >
                                 <MenuIcon />
                             </Button>
@@ -213,7 +209,7 @@ function AppAppBar({mode, toggleColorMode}: AppAppBarProps) {
                                             component="a"
                                             href="/material-ui/getting-started/templates/sign-up/"
                                             target="_blank"
-                                            sx={{width: '100%'}}
+                                            sx={{ width: '100%' }}
                                         >
                                             Sign up
                                         </Button>
@@ -225,7 +221,7 @@ function AppAppBar({mode, toggleColorMode}: AppAppBarProps) {
                                             component="a"
                                             href="/material-ui/getting-started/templates/sign-in/"
                                             target="_blank"
-                                            sx={{width: '100%'}}
+                                            sx={{ width: '100%' }}
                                         >
                                             Sign in
                                         </Button>
