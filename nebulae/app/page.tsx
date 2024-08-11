@@ -16,49 +16,9 @@ import ChatBotOverlay from "./ChatBotOverlay/ChatBotOverlay";
 
 import ChatIcon from "./components/ChatIcon";
 import {useAuth} from "@clerk/clerk-react";
-
-interface ToggleCustomThemeProps {
-    showCustomTheme: Boolean;
-    toggleCustomTheme: () => void;
-}
-
-function ToggleCustomTheme({
-                               showCustomTheme,
-                               toggleCustomTheme,
-                           }: ToggleCustomThemeProps) {
-    return (
-        <Box
-            sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                width: '100dvw',
-                position: 'fixed',
-                bottom: 24,
-            }}
-        >
-            <ToggleButtonGroup
-                color="primary"
-                exclusive
-                value={showCustomTheme}
-                onChange={toggleCustomTheme}
-                aria-label="Platform"
-                sx={{
-                    backgroundColor: 'background.default',
-                    '& .Mui-selected': {
-                        pointerEvents: 'none',
-                    },
-                }}
-            >
-                <ToggleButton value>
-                    <AutoAwesomeRoundedIcon sx={{fontSize: '20px', mr: 1}} />
-                    Custom theme
-                </ToggleButton>
-                <ToggleButton value={false}>Material Design 2</ToggleButton>
-            </ToggleButtonGroup>
-        </Box>
-    );
-}
+import Testimonials from "./components/Testimonials";
+import Pricing from "./components/Pricing";
+import FAQ from "./components/FAQ";
 
 export default function LandingPage() {
     const [mode, setMode] = React.useState<PaletteMode>('light');
@@ -75,6 +35,13 @@ export default function LandingPage() {
             <AppAppBar mode={mode} toggleColorMode={toggleColorMode} />
             <Box sx={{bgcolor: 'background.default'}}>
                 <Features />
+                <Divider />
+                <Testimonials />
+                <Divider />
+                <Pricing />
+                <Divider />
+                <FAQ />
+                <Divider />
             </Box>
 
             {isChatBotOpen && (
