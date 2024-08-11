@@ -1,1 +1,0 @@
-export { AboutNebulae } from "./AboutNebulae";
