@@ -5,6 +5,7 @@ import {useTheme} from '@mui/material/styles';
 import {CancelOutlined} from "@mui/icons-material";
 import Typography from "@mui/material/Typography";
 import {useAuth} from '@clerk/clerk-react';
+import {marked} from 'marked'; // Import marked for Markdown parsing
 
 export default function ChatBotOverlay({closeChatOverlay, isSignedIn, userID}) {
     const [messages, setMessages] = useState([]);
@@ -34,7 +35,6 @@ export default function ChatBotOverlay({closeChatOverlay, isSignedIn, userID}) {
             ...prevMessages,
             {role: 'assistant', content: '', loading: true}
         ]);
-
 
         try {
             let botResp = await sendToLLM([...messages, newMessage], isSignedIn, userID);
@@ -77,6 +77,7 @@ export default function ChatBotOverlay({closeChatOverlay, isSignedIn, userID}) {
         >
             <div
                 style={{
+                    justifyContent: "center",
                     padding: "15px",
                     textAlign: "center",
                     backgroundColor: isDarkMode ? '#2C2C2C' : '#FFFFFF',
@@ -87,7 +88,7 @@ export default function ChatBotOverlay({closeChatOverlay, isSignedIn, userID}) {
                     onClick={closeChatOverlay}
                     style={{
                         position: "absolute",
-                        top: "15px",
+                        top: "23px",
                         right: "15px",
                         cursor: "pointer",
                         color: isDarkMode ? '#FFF' : '#333',
@@ -108,8 +109,9 @@ export default function ChatBotOverlay({closeChatOverlay, isSignedIn, userID}) {
                         height={40}
                         style={{objectFit: "contain"}}
                     />
-                    <Typography variant={"h6"} color={isDarkMode ? 'invert(1)' : 'invert(0)'}>
-                        Aries: AI Customer Support</Typography>
+                    <Typography variant={"h6"} color={isDarkMode ? 'white' : 'black'}>
+                        Aries: AI Customer Support
+                    </Typography>
                 </div>
             </div>
 
@@ -149,7 +151,11 @@ export default function ChatBotOverlay({closeChatOverlay, isSignedIn, userID}) {
                                     <span></span>
                                 </div>
                             )}
-                            {!msg.loading && msg.content}
+                            {!msg.loading && (
+                                <div
+                                    dangerouslySetInnerHTML={{__html: marked(msg.content)}} // Convert Markdown to HTML
+                                />
+                            )}
                         </div>
                     </div>
                 ))}
